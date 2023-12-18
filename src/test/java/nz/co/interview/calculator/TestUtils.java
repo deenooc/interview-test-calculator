@@ -8,6 +8,5 @@ public class TestUtils {
 
     public static int getRandomInteger() {
         return random.nextInt(1000);
-
     }
 }
