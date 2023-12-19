@@ -46,7 +46,7 @@ public class OperationEvaluator {
 
         public static Operator getOperator(final String operatorValue) {
             if (operatorMap == null) {
-                initializeMapping();
+                initialiseMapping();
             }
             if (operatorMap.containsKey(operatorValue)) {
                 return operatorMap.get(operatorValue);
@@ -54,7 +54,7 @@ public class OperationEvaluator {
             return null;
         }
 
-        private static void initializeMapping() {
+        private static void initialiseMapping() {
             operatorMap = new HashMap<>();
             for (Operator operator : Operator.values()) {
                 operatorMap.put(operator.operatorValue, operator);
