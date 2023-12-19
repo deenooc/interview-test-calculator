@@ -18,8 +18,8 @@ class ITCalculator {
     @BeforeEach
     void setUp() {
         final InputValidator inputValidator = new InputValidator();
-        final OperatorEvaluator operatorEvaluator = new OperatorEvaluator();
-        calculator = new Calculator(inputValidator, operatorEvaluator);
+        final OperationEvaluator operationEvaluator = new OperationEvaluator();
+        calculator = new Calculator(inputValidator, operationEvaluator);
     }
 
     @Test

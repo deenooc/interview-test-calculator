@@ -7,11 +7,11 @@ import nz.co.interview.calculator.validator.InputValidator;
 public class Calculator {
 
     private final InputValidator inputValidator;
-    private final OperatorEvaluator operatorEvaluator;
+    private final OperationEvaluator operationEvaluator;
 
-    public Calculator(final InputValidator inputValidator, final OperatorEvaluator operatorEvaluator) {
+    public Calculator(final InputValidator inputValidator, final OperationEvaluator operationEvaluator) {
         this.inputValidator = inputValidator;
-        this.operatorEvaluator = operatorEvaluator;
+        this.operationEvaluator = operationEvaluator;
     }
 
     public String calculate(final String[] input) {
@@ -26,7 +26,7 @@ public class Calculator {
     private String evaluateExpression(final String[] input) {
         final int left = Integer.parseInt(input[0]);
         final int right = Integer.parseInt(input[2]);
-        final Operation operation = operatorEvaluator.evaluateOperation(input[1]);
+        final Operation operation = operationEvaluator.evaluateOperation(input[1]);
 
         return Integer.toString(operation.calculate(left, right));
     }
