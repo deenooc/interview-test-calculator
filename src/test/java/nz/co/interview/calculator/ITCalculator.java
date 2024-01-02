@@ -1,10 +1,16 @@
 package nz.co.interview.calculator;
 
-import nz.co.interview.calculator.validator.InputValidator;
+import nz.co.interview.CalculatorApplication;
+import nz.co.interview.calculator.factory.InputFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
+import static nz.co.interview.calculator.Operator.ADD;
+import static nz.co.interview.calculator.Operator.DIVIDE;
+import static nz.co.interview.calculator.Operator.MULTIPLY;
+import static nz.co.interview.calculator.Operator.SUBTRACT;
 import static nz.co.interview.calculator.TestUtils.getRandomInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -14,17 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ITCalculator {
 
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String TIMES = "*";
-    private static final String DIVIDE = "/";
-    private Calculator calculator;
+    private CalculatorApplication calculatorApplication;
 
     @BeforeEach
     void setUp() {
-        final InputValidator inputValidator = new InputValidator();
-        final OperationEvaluator operationEvaluator = new OperationEvaluator();
-        calculator = new Calculator(inputValidator, operationEvaluator);
+        calculatorApplication = new CalculatorApplication(new InputFactory());
     }
 
     @Test
@@ -33,10 +33,10 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String[] input = new String[] { Integer.toString(left), PLUS, Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, ADD.operatorValue, right);
 
         // When
-        final String actual = calculator.calculate(input);
+        final String actual = calculatorApplication.processExpression(input);
 
         // Then
         assertThat(actual, equalTo(valueOf(left + right)));
@@ -48,10 +48,10 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String[] input = new String[] { Integer.toString(left), MINUS, Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, SUBTRACT.operatorValue, right);
 
         // When
-        final String actual = calculator.calculate(input);
+        final String actual = calculatorApplication.processExpression(input);
 
         // Then
         assertThat(actual, equalTo(valueOf(left - right)));
@@ -63,10 +63,10 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String[] input = new String[] { Integer.toString(left), TIMES, Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, MULTIPLY.operatorValue, right);
 
         // When
-        final String actual = calculator.calculate(input);
+        final String actual = calculatorApplication.processExpression(input);
 
         // Then
         assertThat(actual, equalTo(valueOf(left * right)));
@@ -78,10 +78,10 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String[] input = new String[] { Integer.toString(left), DIVIDE, Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, DIVIDE.operatorValue, right);
 
         // When
-        final String actual = calculator.calculate(input);
+        final String actual = calculatorApplication.processExpression(input);
 
         // Then
         assertThat(actual, equalTo(valueOf(left / right)));
@@ -93,10 +93,13 @@ class ITCalculator {
         final int right = 0;
 
         // Given
-        final String[] input = new String[] { Integer.toString(left), DIVIDE, Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, DIVIDE.operatorValue, right);
 
         // When
-        final IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, () -> calculator.calculate(input));
+        final IllegalArgumentException actual = assertThrows(
+                IllegalArgumentException.class,
+                () -> calculatorApplication.processExpression(input)
+        );
 
         // Then
         assertThat(actual.getMessage(), is("Cannot divide by zero."));
@@ -108,14 +111,17 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String[] input = new String[] { Integer.toString(left) , "@", Integer.toString(right) };
+        final String input = String.format( "%d %s %d", left, "@", right);
 
         // When
-        final IllegalArgumentException actual = assertThrows(IllegalArgumentException.class, () -> calculator.calculate(input));
+        final IllegalArgumentException actual = assertThrows(
+                IllegalArgumentException.class,
+                () -> calculatorApplication.processExpression(input)
+        );
 
         // Then
         assertThat(actual, notNullValue());
-        assertThat(actual.getMessage(), equalTo("Cannot perform calculation, invalid input."));
+        assertThat(actual.getMessage(), equalTo(format("The expression entered (%s) is not valid.", input)));
     }
 
 }

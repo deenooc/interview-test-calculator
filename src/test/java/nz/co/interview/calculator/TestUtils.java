@@ -9,4 +9,8 @@ public class TestUtils {
     public static int getRandomInteger() {
         return random.nextInt(1000);
     }
+
+    public static String getRandomCharacter() {
+        return String.valueOf((char)(random.nextInt(95)+32));
+    }
 }

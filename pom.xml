@@ -17,6 +17,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <mockito.version>3.9.0</mockito.version>
+    <bean-matchers.version>0.12</bean-matchers.version>
   </properties>
 
   <dependencies>
@@ -42,6 +43,12 @@
       <artifactId>mockito-core</artifactId>
       <version>${mockito.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.bean-matchers</groupId>
+      <artifactId>bean-matchers</artifactId>
+      <version>0.12</version>
+      <scope>${bean-matchers.version}</scope>
     </dependency>
   </dependencies>
 </project>

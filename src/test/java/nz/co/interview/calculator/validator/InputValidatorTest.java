@@ -72,4 +72,12 @@ class InputValidatorTest {
         assertThat(actual, is(false));
     }
 
+    @Test
+    void Expression_can_pass_validation() {
+        // Given
+
+        // When
+
+        // Then
+    }
 }
