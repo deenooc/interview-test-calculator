@@ -1,5 +1,6 @@
 package nz.co.interview.calculator;
 
+import nz.co.interview.calculator.model.Operator;
 import nz.co.interview.calculator.operation.Operation;
 
 public class OperationEvaluator {

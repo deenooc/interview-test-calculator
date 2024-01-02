@@ -6,7 +6,7 @@ import nz.co.interview.calculator.operation.Operation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static nz.co.interview.calculator.Operator.ADD;
+import static nz.co.interview.calculator.model.Operator.ADD;
 import static nz.co.interview.calculator.TestUtils.getRandomInteger;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,7 +26,7 @@ class CalculatorTest {
 
     @Test
     void Can_calculate_arithmetic_expression() {
-        final CalculatorInput input = getCalculatorInput(ADD.operatorValue);
+        final CalculatorInput input = getCalculatorInput(ADD.getOperatorValue());
 
         final Operation operation = mock(Operation.class);
         final int result = getRandomInteger();

@@ -1,4 +1,4 @@
-package nz.co.interview.calculator;
+package nz.co.interview.calculator.model;
 
 import nz.co.interview.calculator.operation.AdditionOperation;
 import nz.co.interview.calculator.operation.DivisionOperation;
@@ -40,6 +40,10 @@ public enum Operator {
 
     Operator(final String operatorValue) {
         this.operatorValue = operatorValue;
+    }
+
+    public String getOperatorValue() {
+        return  operatorValue;
     }
 
     public static Operator getOperator(final String operatorValue) {

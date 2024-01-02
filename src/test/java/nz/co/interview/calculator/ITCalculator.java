@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
-import static nz.co.interview.calculator.Operator.ADD;
-import static nz.co.interview.calculator.Operator.DIVIDE;
-import static nz.co.interview.calculator.Operator.MULTIPLY;
-import static nz.co.interview.calculator.Operator.SUBTRACT;
+import static nz.co.interview.calculator.model.Operator.ADD;
+import static nz.co.interview.calculator.model.Operator.DIVIDE;
+import static nz.co.interview.calculator.model.Operator.MULTIPLY;
+import static nz.co.interview.calculator.model.Operator.SUBTRACT;
 import static nz.co.interview.calculator.TestUtils.getRandomInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -33,7 +33,7 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String input = String.format( "%d %s %d", left, ADD.operatorValue, right);
+        final String input = String.format( "%d %s %d", left, ADD.getOperatorValue(), right);
 
         // When
         final String actual = calculatorApplication.processExpression(input);
@@ -48,7 +48,7 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String input = String.format( "%d %s %d", left, SUBTRACT.operatorValue, right);
+        final String input = String.format( "%d %s %d", left, SUBTRACT.getOperatorValue(), right);
 
         // When
         final String actual = calculatorApplication.processExpression(input);
@@ -63,7 +63,7 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String input = String.format( "%d %s %d", left, MULTIPLY.operatorValue, right);
+        final String input = String.format( "%d %s %d", left, MULTIPLY.getOperatorValue(), right);
 
         // When
         final String actual = calculatorApplication.processExpression(input);
@@ -78,7 +78,7 @@ class ITCalculator {
         final int right = getRandomInteger();
 
         // Given
-        final String input = String.format( "%d %s %d", left, DIVIDE.operatorValue, right);
+        final String input = String.format( "%d %s %d", left, DIVIDE.getOperatorValue(), right);
 
         // When
         final String actual = calculatorApplication.processExpression(input);
@@ -93,7 +93,7 @@ class ITCalculator {
         final int right = 0;
 
         // Given
-        final String input = String.format( "%d %s %d", left, DIVIDE.operatorValue, right);
+        final String input = String.format( "%d %s %d", left, DIVIDE.getOperatorValue(), right);
 
         // When
         final IllegalArgumentException actual = assertThrows(
