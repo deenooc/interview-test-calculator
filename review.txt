@@ -1,0 +1,8 @@
+It looks like they may not care about the input from terminal (args on main), this is no harm to have but make you harder to explain it, so probably you can remove logic of that to make it straight forward, eg. you can focus on the Calculator class, with other utility classes as dependency (like OperationEvaluator you have injeted)
+The resposibility of processExpression probably can be extracted as a class.
+Maybe the exception can throw in validator to make it more clean.
+May consider a interface for InputFactory, to make it open for extention in further requirement, like the other ways to create input
+May change integer to double for operands
+The Operator class seems not quite follow signle-resposibility principle, may split resposibility into two classes?
+format code (like we apply spotless in vts)
+Take open-close principle into consideration, make further extention like adding new operation as simple as posible, start with TDD when update your code during the code review session.
